@@ -12,16 +12,18 @@ var stackMethods = {};
 
 stackMethods.push = function(item) {
   this.stack[this.stackSize] = item;
-  this.stackSize++
-}
+  this.stackSize++;
+};
+
 stackMethods.pop = function() {
-  if( this.stackSize > 0 ) {
-    this.stackSize--
+  if ( this.stackSize > 0 ) {
+    this.stackSize--;
     var poppedItem = this.stack[this.stackSize];
     delete this.stack[this.stackSize];
     return poppedItem;
   }
-}
+};
+
 stackMethods.size = function() {
   return this.stackSize;
-}
+};

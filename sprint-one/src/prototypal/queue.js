@@ -13,16 +13,17 @@ var queueMethods = {};
 queueMethods.enqueue = function(item) {
   this.queue[this.enqueueCount] = item;
   this.enqueueCount++;
-}
+};
+
 queueMethods.dequeue = function() {
-  if(this.size() > 0) {
+  if (this.size() > 0) {
     var item = this.queue[this.dequeueCount];
     delete this.queue[this.dequeueCount];
     this.dequeueCount++;
     return item;
   }
-}
+};
 
 queueMethods.size = function() {
   return this.enqueueCount - this.dequeueCount;
-}
+};
