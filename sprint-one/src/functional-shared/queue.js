@@ -4,6 +4,8 @@ var Queue = function() {
   var obj = {};
   obj.queue = {};
   obj.queueSize = 0;
+  obj.insertIndex = 0;
+  obj.removeIndex = 0;
 
   obj.enqueue = queueMethods.enqueue;
   obj.dequeue = queueMethods.dequeue;
@@ -16,24 +18,19 @@ var queueMethods = {
 };
 
 queueMethods.enqueue = function(value) {
-  this.queue[this.queueSize] = value;
-  this.queueSize++;
+  this.queue[this.insertIndex] = value;
+  this.insertIndex++;
 };
 
 queueMethods.dequeue = function() {
-  if (this.queueSize > 0) {
-    var result = this.queue[0];
-
-    this.queueSize--;
-    for (var i = 0; i < this.queueSize; i++) {
-      this.queue[i] = this.queue[i + 1];
-    }
-
-    delete this.queue[this.queueSize];
+  if (this.size() > 0) {
+    var result = this.queue[this.removeIndex];
+    delete this.queue[this.removeIndex];
+    this.removeIndex++;
     return result;
   }
 };
 
 queueMethods.size = function() {
-  return this.queueSize;
+  return this.insertIndex - this.removeIndex;
 };
