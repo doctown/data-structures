@@ -21,7 +21,17 @@ queueMethods.enqueue = function(value) {
 };
 
 queueMethods.dequeue = function() {
+  if (this.queueSize > 0) {
+    var result = this.queue[0];
 
+    this.queueSize--;
+    for (var i = 0; i < this.queueSize; i++) {
+      this.queue[i] = this.queue[i + 1];
+    }
+
+    delete this.queue[this.queueSize];
+    return result;
+  }
 };
 
 queueMethods.size = function() {
