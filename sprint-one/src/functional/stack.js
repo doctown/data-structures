@@ -12,14 +12,10 @@ var Stack = function() {
   };
 
   someInstance.pop = function() {
-    if (items >= 0) {
-      item--;
+    if (items > 0) {
+      items--;
       return storage[items];
-    } else {
-      // should an error be thrown if the stack is popped while empty
-      return undefined;
     }
-
   };
 
   someInstance.size = function() {
