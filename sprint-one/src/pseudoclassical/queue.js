@@ -13,7 +13,12 @@ Queue.prototype.enqueue = function(item) {
 };
 
 Queue.prototype.dequeue = function () {
-  
+  if (this.size() > 0) {
+    var result = this.queue[this.removeIndex];
+    delete this.queue[this.removeIndex];
+    this.removeIndex++;
+    return result;
+  }
 };
 
 Queue.prototype.size = function () {
