@@ -3,17 +3,19 @@ var Queue = function() {
   // but try not not reference your old code in writing the new style.
 
   this.queue = {};
-  this.queueSize = 0;
+  this.insertIndex = 0;
+  this.removeIndex = 0;
 };
 
-Queue.prototype.push = function(item) {
-
+Queue.prototype.enqueue = function(item) {
+  this.queue[this.insertIndex] = item;
+  this.insertIndex++;
 };
 
-Queue.prototype.pop = function () {
+Queue.prototype.dequeue = function () {
   
 };
 
 Queue.prototype.size = function () {
-  return this.queueSize;
+  return this.insertIndex - this.removeIndex;
 };
