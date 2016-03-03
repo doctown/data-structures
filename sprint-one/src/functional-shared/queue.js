@@ -7,9 +7,7 @@ var Queue = function() {
   obj.insertIndex = 0;
   obj.removeIndex = 0;
 
-  obj.enqueue = queueMethods.enqueue;
-  obj.dequeue = queueMethods.dequeue;
-  obj.size = queueMethods.size;
+  _.extend(obj, queueMethods);
 
   return obj;
 };
