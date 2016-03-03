@@ -13,7 +13,12 @@ Stack.prototype = {
     this.stackSize++;  
   },
   pop: function () {
-
+    if (this.stackSize > 0) {
+      this.stackSize--;
+      var result = this.stack[this.stackSize];
+      delete this.stack[this.stackSize];
+    }
+    return result;
   }, 
   size: function () {
     return this.stackSize;
