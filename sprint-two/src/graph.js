@@ -22,8 +22,7 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   _.each(this.graph[node], function (item) {
-    var itemIndex = this.graph[item].indexOf(node);
-    this.graph[item].splice(itemIndex, 1);
+    this.removeElement(item, node);
   });
   delete this.graph[node];
 };
@@ -44,6 +43,8 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 // ------------------------
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
+  this.removeElement(fromNode, toNode);
+  this.removeElement(toNode, fromNode);
 };
 
 // ------------------------
@@ -51,6 +52,10 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 Graph.prototype.forEachNode = function(cb) {
 };
 
+Graph.prototype.removeElement = function(key, obj) {
+  var itemIndex = this.graph[key].indexOf(obj);
+  this.graph[key].splice(itemIndex, 1);    
+};
 /*
  * Complexity: What is the time complexity of the above functions?
  */
