@@ -14,7 +14,7 @@ HashTable.prototype.insert = function(k, v) {
   } else {
     var stored = this._storage.get(index);
     var isFound = false;
-
+    
     for (var i = 0; i < stored.length; i += 2) {
       if (stored[i] === k) {
         stored[i + 1] = v;
