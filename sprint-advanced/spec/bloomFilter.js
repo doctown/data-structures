@@ -45,10 +45,14 @@ describe('bloom-filter', function() {
   });
 
   it('should return false positive when the item is not in the bloom filter', function() {
-    var falsePositive = null;
-    var positive = null;
-    //bloomFilter.insert(positive)
-    //bloomFilter.insert(falsePositive);
-    //expect(bloomFilter.contains(falsePositive)).to.equal(true);
+    var falsePositive = 'Jack';
+    var positive = 'Mark';
+    
+    bloomFilter.insert(positive);
+    expect(bloomFilter.contains(falsePositive)).to.equal(true);
+    falsePositive = 'Max';
+    positive = 'Joe';
+    bloomFilter.insert(positive);
+    expect(bloomFilter.contains(falsePositive)).to.equal(true);
   });
 });
