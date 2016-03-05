@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data structure performance</title>
+  <script type='text/javascript' src='lib/underscore/underscore.js'></script>
+  <script type='text/javascript' src='sprint-one/src/functional/queue.js'></script>
+  <script type='text/javascript' src='sprint-one/src/functional/stack.js'></script>
+</head>
+<body>
+  <script type='text/javascript'>
+
+    var myStack = new Stack();
+    var myQueue = new Queue();
+    for (var i = 0; i < 50000000; i++) {
+      myStack.push(i);
+     }
+
+    for (var i = 0; i < 50000000; i++) {
+      myQueue.enqueue(i);
+    }
+  </script>
+</body>
+</html>
