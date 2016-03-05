@@ -5,6 +5,19 @@ describe('bloom-filter', function() {
     bloomFilter = new BloomFilter();
   });
 
+  it('should return false for each item in an instantiated bloom filter', function() {
+    var isAllFalse = true;
+
+    bloomFilter.limitedArray.each(function (item, index, array) {
+      if (item === true) {
+        isAllFalse = false;
+      }
+    });
+
+    expect(isAllFalse).to.equal(true);
+  });
+
+
   it('should have methods named "insert" and "contains"', function() {
     expect(bloomFilter.insert).to.be.a('function');
     expect(bloomFilter.contains).to.be.a('function');
