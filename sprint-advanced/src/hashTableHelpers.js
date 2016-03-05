@@ -41,6 +41,7 @@ var LimitedArray = function(limit) {
   return limitedArray;
 };
 
+
 // This is a "hashing function". You don't need to worry about it, just use it
 // to turn any string into an integer that is well-distributed between the
 // numbers 0 and `max`
@@ -74,6 +75,7 @@ var getIndexBelowMaxForKeyThree = function(str, max) {
   return hash % max;
 };
 
+var hashFunctions = [getIndexBelowMaxForKeyOne, getIndexBelowMaxForKeyTwo, getIndexBelowMaxForKeyThree];
 /*
  * Complexity: What is the time complexity of the above functions?
  */
