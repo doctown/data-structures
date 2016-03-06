@@ -6,7 +6,6 @@ var BinarySearchTree = function(value) {
   object.right = null;
 
   return object;
-
 };
 
 BinarySearchTree.prototype.insert = function(value) {
