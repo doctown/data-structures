@@ -1,5 +1,8 @@
+var NUM_HASH_FUNCTIONS = 3; // The number of hash function used in bloom filter
+var BLOOM_FILTER_SIZE = 18; // The number of indexes in the bloom filter array
+
 var BloomFilter = function () {
-  this.capacity = 18;
+  this.capacity = BLOOM_FILTER_SIZE;
   this.limitedArray = new LimitedArray (this.capacity);
   for (var i = 0; i < this.capacity; i++) {
     this.limitedArray.set(i, false);
