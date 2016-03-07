@@ -1,7 +1,12 @@
-var LinkedList = function() {
+var DoublyLinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
+
+  // Add an item to the head of the list
+  list.addToHead = function(value) {
+
+  };
 
   list.addToTail = function(value) {
     if (list.tail === null && list.head === null) {
@@ -13,12 +18,17 @@ var LinkedList = function() {
     }
   };
 
+  // Remove the last node from the list and returns the value
+  list.removeTail = function () {
+
+  };
+
   list.removeHead = function() {
     var node = list.head;
     list.head = node.next;
 
     var result = node.value;
-    delete node;
+    delete list[node];
 
     if (list.head === null) {
       list.tail = null;
@@ -42,18 +52,18 @@ var LinkedList = function() {
 
   return list;
 };
+/*
+ * Complexity: What is the time complexity of the above functions?
+ * addToTail & removeHead are O(1)
+ * contains is O(n)
+ */
 
 var Node = function(value) {
   var node = {};
 
   node.value = value;
   node.next = null;
+  node.prev = null;
 
   return node;
 };
-
-/*
- * Complexity: What is the time complexity of the above functions?
- * addToTail & removeHead are O(1)
- * contains is O(n)
- */
