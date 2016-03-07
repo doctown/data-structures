@@ -7,49 +7,76 @@ var DoublyLinkedList = function() {
   list.addToHead = function(value) {
     // Create a node
     var node = new Node(value);
+
     // Make the node.next point to this head and the previous point to the previous to null
-    node.next = list.head;
+    if (list.head == null && list.tail == null) {
+      list.head = new Node(null);
+      list.tail = new Node(null);
+      list.tail.prev = node;
+      list.head.next = list.tail;
+    } else if (list.head.next === list.tail && list.tail.prev == list.head) {
+      list.tail.prev = node;
+    }
 
     // Point head to this node.
-    list.head = node;
+      node.next = list.head.next;
+      node.prev = list.head;
+      list.head.next = node;
   };
 
   list.addToTail = function(value) {
+    var node = new Node(value);
+
     if (list.tail === null && list.head === null) {
-      list.tail = new Node(value);
-      list.head = list.tail;
-    } else {
-      list.tail.next = new Node(value);
-      list.tail.next.prev = list.tail;
-      list.tail = list.tail.next;
+      list.head = new Node(null);
+      list.tail = new Node(null);
+      list.head.next = node;
+      list.tail.prev = list.head;
+    } else if (list.head.next === list.tail && list.tail.prev == list.head) {
+      list.head.next = node;
     }
+    // Point the tail to this new node
+    node.next = list.tail;
+    node.prev = list.tail.prev;
+    list.tail.prev = node;
   };
 
   // Remove the last node from the list and returns the value
   list.removeTail = function () {
+    // if this is empty throw an error
+    if (list.tail == null && list.head == null || list.head.next === list.tail && list.tail.prev === list.head) {
+      throw new Error("Cannot delete from an empty linked list");
+    }
 
+    // Node equals the current tail
+    var removalNode = list.tail.prev;
+    // Result equals the value in the tail
+    var removalValue = removalNode.value;
+
+    // The tail is now equal to the prev node
+    list.tail.prev = removalNode.prev;
+
+    // Delete the tail node
+    delete list[removalNode];
+    // Return result
+    return removalValue;
   };
 
   list.removeHead = function() {
-    var node = list.head;
-    list.head = node.next;
+    var node = list.head.next;
+    list.head.next = node.next;
 
     var result = node.value;
     delete list[node];
 
-    if (list.head === null) {
-      list.tail = null;
-    } else {
-      list.head.prev = null;
-    }
     return result;
   };
 
   list.contains = function(target) {
-    var cur = list.head;
+    var cur = list.head.next;
     var found = false;
 
-    while (found === false && cur !== null) {
+    while (found === false && cur !== list.tail) {
       if (cur.value === target) {
         found = true;
       } else {

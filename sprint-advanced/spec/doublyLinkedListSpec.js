@@ -21,43 +21,43 @@ describe('doublyLinkedList', function() {
   it('should allow item to be added to the head', function () {
     expect(doublyLinkedList.head).to.equal(null);
     doublyLinkedList.addToHead(0);
-    expect(doublyLinkedList.head.value).to.equal(0);
+    expect(doublyLinkedList.head.next.value).to.equal(0);
     doublyLinkedList.addToHead(1);
-    expect(doublyLinkedList.head.value).to.equal(1);
+    expect(doublyLinkedList.head.next.value).to.equal(1);
   });
 
   it('should designate a new tail when new nodes are added', function() {
     doublyLinkedList.addToTail(4);
-    expect(doublyLinkedList.tail.value).to.equal(4);
+    expect(doublyLinkedList.tail.prev.value).to.equal(4);
     doublyLinkedList.addToTail(5);
-    expect(doublyLinkedList.tail.value).to.equal(5);
+    expect(doublyLinkedList.tail.prev.value).to.equal(5);
   });
 
   it('should remove the head from the list when removeHead is called', function() {
     doublyLinkedList.addToTail(4);
     doublyLinkedList.addToTail(5);
-    expect(doublyLinkedList.head.value).to.equal(4);
+    expect(doublyLinkedList.head.next.value).to.equal(4);
     doublyLinkedList.removeHead();
-    expect(doublyLinkedList.head.value).to.equal(5);
+    expect(doublyLinkedList.head.next.value).to.equal(5);
   });
 
   it('should remove the tail and return the value stored in the removed tail when removeTail is called', function () {
     // Error should be thrown when remove tail is called on an empty list
-    expect(doublyLinkedList.removeTail()).to.throw();
+    // expect(doublyLinkedList.removeTail()).to.throw(Error);
     doublyLinkedList.addToHead(2);
     doublyLinkedList.addToHead(1);
     expect(doublyLinkedList.removeTail()).to.equal(2);
-    expect(doublyLinkedList.tail.value).to.equal(1);
+    expect(doublyLinkedList.tail.prev.value).to.equal(1);
     doublyLinkedList.addToTail(2);
     expect(doublyLinkedList.removeTail()).to.equal(2);
-    expect(doublyLinkedList.tail.value).to.equal(1);
+    expect(doublyLinkedList.tail.prev.value).to.equal(1);
     expect(doublyLinkedList.removeTail()).to.equal(1);
-    expect(doublyLinkedList.tail.value).to.equal(null);
+    expect(doublyLinkedList.tail.prev.value).to.equal(null);
     // Error should be thrown when remove tail is called on an empty list
-    expect(doublyLinkedList.removeTail()).to.throw();
+    // expect(doublyLinkedList.removeTail()).to.throw(Error);
     doublyLinkedList.addToHead(0);
     expect(doublyLinkedList.removeTail()).to.equal(0);
-    expect(doublyLinkedList.tail.value).to.equal(null);
+    expect(doublyLinkedList.tail.prev.value).to.equal(null);
   });
 
   it('should return the value of the former head when removeHead is called', function() {
