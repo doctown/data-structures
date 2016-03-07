@@ -5,17 +5,19 @@ var DoublyLinkedList = function() {
 
   // Add an item to the head of the list
   list.addToHead = function(value) {
-    // Create a node
-    var node = new Node(value);
-    // Make the node.next point to this head and the previous point to the previous to null
-    node.next = list.head;
-
-    // Point head to this node.
-    list.head = node;
+    // If head is null
+    if (list.head == null && list.tail == null) {
+      list.head = new Node(value);
+      list.tail = list.head;
+    } else {
+      list.head.prev = new Node(value);
+      list.head.prev.next = list.head;
+      list.head = list.head.prev;
+    }
   };
 
   list.addToTail = function(value) {
-    if (list.tail === null && list.head === null) {
+    if (list.tail === null && list.head === null) { // linked list is empty
       list.tail = new Node(value);
       list.head = list.tail;
     } else {
@@ -27,7 +29,34 @@ var DoublyLinkedList = function() {
 
   // Remove the last node from the list and returns the value
   list.removeTail = function () {
+    if (list.tail === null) {
+      return undefined;
+    }
 
+    // Create a node to store the current tail
+    var nodeToRemove = list.tail;
+    // Create a result to hold the node to be removed
+    var returnValue = nodeToRemove.value;
+
+    // Assign the tail to the new node
+    list.tail = nodeToRemove.prev;
+
+    // If the tail equals null
+    if (list.tail == null) {
+      // Then the head = null
+      list.head = null;
+    } else { // Assign the tail next to null
+      list.tail.next = null;
+      if (list.tail === list.head) {
+        list.head.next = null;
+      }
+    }
+
+    // Delete the node
+    delete list[nodeToRemove];
+
+    // Return the result
+    return returnValue;
   };
 
   list.removeHead = function() {
@@ -41,6 +70,9 @@ var DoublyLinkedList = function() {
       list.tail = null;
     } else {
       list.head.prev = null;
+      if (list.head === list.tail) {
+        list.tail.prev = null;
+      }
     }
     return result;
   };
