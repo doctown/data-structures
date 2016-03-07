@@ -5,7 +5,13 @@ var DoublyLinkedList = function() {
 
   // Add an item to the head of the list
   list.addToHead = function(value) {
+    // Create a node
+    var node = new Node(value);
+    // Make the node.next point to this head and the previous point to the previous to null
+    node.next = list.head;
 
+    // Point head to this node.
+    list.head = node;
   };
 
   list.addToTail = function(value) {
@@ -14,6 +20,7 @@ var DoublyLinkedList = function() {
       list.head = list.tail;
     } else {
       list.tail.next = new Node(value);
+      list.tail.next.prev = list.tail;
       list.tail = list.tail.next;
     }
   };
@@ -32,6 +39,8 @@ var DoublyLinkedList = function() {
 
     if (list.head === null) {
       list.tail = null;
+    } else {
+      list.head.prev = null;
     }
     return result;
   };
