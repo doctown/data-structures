@@ -4,6 +4,7 @@ var Tree = function(value) {
 
   _.extend(newTree, treeMethods);
 
+  newTree.parent = null;
   newTree.children = [];
   return newTree;
 };
@@ -13,7 +14,9 @@ var Tree = function(value) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  this.children.push(new Tree(value));
+  var newChild = new Tree(value);
+  newChild.parent = this;
+  this.children.push(newChild);
 };
 
 treeMethods.contains = function(target) {
@@ -26,8 +29,20 @@ treeMethods.contains = function(target) {
   return res;
 };
 
+// Removes a child from it's parent and removes it connection to the parent.
+treeMethods.removeFromParent = function () {
+  if (this.parent === null) {
+    return;
+  }
+  var parent = this.parent;
+  this.parent = null;
 
-
+  for (var i = 0; i < parent.children.length; i++) {
+    if (parent.children[i] === this) {
+      parent.children.splice(i,1);
+    }
+  }
+};
 
   // * Complexity: What is the time complexity of the above functions?
 
