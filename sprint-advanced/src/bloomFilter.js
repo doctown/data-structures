@@ -24,15 +24,15 @@ BloomFilter.prototype.insert = function (value) {
 };
 
 BloomFilter.prototype.contains = function(value) {
-  var isFound = false;
+  var isFound = true;
   var that = this;
 
   // loop through each hash function 
   hashFunctions.forEach(function (iterator) {
     // get the index of the hash value
       // if any return true, return true
-    if (that.limitedArray.get(iterator(value, that.capacity))) {
-      isFound = true;
+    if ( that.limitedArray.get( iterator(value, that.capacity) ) === false ) {
+      isFound = false;
     }
   });
 
